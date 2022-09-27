@@ -52,6 +52,8 @@ for file_name in glob.glob("html_files/*.html"):
 		price = price.replace(" ", "")
 		# print(price)
 
+		logo = pharmacy_row.find("img")['src']
+
 
 		how_to_reg = pharmacy_row.find("span", {"class": "how_to_reg"})
 		if how_to_reg is None:
@@ -79,6 +81,7 @@ for file_name in glob.glob("html_files/*.html"):
 			"description": description,
 			"discount_amount": float(discount_amount),
 			"total_price": float(price) + float(discount_amount), 
+			"logo": logo,
 			"scrape_time": scrape_time
 			}])
 		])
