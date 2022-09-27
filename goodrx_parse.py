@@ -35,6 +35,8 @@ for file_name in glob.glob("html_files/*.html"):
 	f.close()
 
 
+	description = soup.find("span", {"data-qa": "drug-price-description"}).text
+
 	# print(soup)
 	pharmacy_list = soup.find("div", {"aria-label": "List of pharmacy prices"})
 
@@ -68,6 +70,7 @@ for file_name in glob.glob("html_files/*.html"):
 			"form": form,
 			"dosage": dosage,
 			"quantity": quantity,
+			"description": description,
 			"scrape_time": scrape_time
 			}])
 		])
