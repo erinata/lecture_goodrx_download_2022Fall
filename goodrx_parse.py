@@ -54,9 +54,13 @@ for file_name in glob.glob("html_files/*.html"):
 
 		how_to_reg = pharmacy_row.find("span", {"class": "how_to_reg"})
 		if how_to_reg is None:
-			how_to_reg = "no-discount"
+			discount_amount = "0"
+			how_to_reg = "no-discount"			
 		else:
+			discount_amount = re.findall('\$(.*)', how_to_reg.parent.text)[0]
 			how_to_reg = "with-discount"
+			
+
 
 
 
@@ -64,13 +68,15 @@ for file_name in glob.glob("html_files/*.html"):
 		df = pandas.concat([df,  
 		pandas.DataFrame.from_records([{
 			"pharmacy_name": pharmacy_name,
-			"price": price,
+			"price": float(price),
 			"goodrx_discount": how_to_reg,
 			"name": name,
 			"form": form,
 			"dosage": dosage,
 			"quantity": quantity,
 			"description": description,
+			"discount_amount": float(discount_amount),
+			"total_price": float(price) + float(discount_amount), 
 			"scrape_time": scrape_time
 			}])
 		])
