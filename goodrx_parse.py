@@ -36,6 +36,7 @@ for file_name in glob.glob("html_files/*.html"):
 
 
 	description = soup.find("span", {"data-qa": "drug-price-description"}).text
+	generic_name = soup.find("div", {"data-qa": "drug-price-header-subtitle"}).text
 
 	# print(soup)
 	pharmacy_list = soup.find("div", {"aria-label": "List of pharmacy prices"})
@@ -71,6 +72,7 @@ for file_name in glob.glob("html_files/*.html"):
 			"price": float(price),
 			"goodrx_discount": how_to_reg,
 			"name": name,
+			"generic_name": generic_name,
 			"form": form,
 			"dosage": dosage,
 			"quantity": quantity,
